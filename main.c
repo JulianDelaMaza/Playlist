@@ -5,6 +5,7 @@
 int main(){
     add_song("La camisa negra", "Juanes");
     add_song("Diluvio", "Rauw Alejandro");
+    add_song("222", "Yan block");
     show_playlist();
     free_playlist();
     return 0;

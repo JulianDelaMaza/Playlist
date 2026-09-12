@@ -8,7 +8,6 @@ struct t_song {
     struct t_song* previous;
 };
 
-struct t_song* playlist = NULL;
 
 struct t_song* firstSong = NULL;
 
@@ -18,15 +17,13 @@ void add_song(char* title, char* artist){
     struct t_song* song = malloc(sizeof(struct t_song));
     song->artist = artist;
     song->title = title;
-    if(playlist != NULL){
-    song->previous = playlist;
+    if(firstSong != NULL){
+    song->previous = firstSong->previous;
     song->next = firstSong;
-    playlist->next = song;
-    playlist = song;
-    firstSong->previous = playlist;
+    firstSong->previous->next=song;
+    firstSong->previous = song;
     }else{
         firstSong = song;
-        playlist = song;
         song->next = song;
         song->previous = song;
     }

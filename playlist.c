@@ -29,6 +29,7 @@ void add_song(char* title, char* artist){
     }
 }
 void show_playlist(){
+    if(firstSong!=NULL){
     int i=2;
     current = firstSong;
     printf("\nCancion 1: %s\n Artista: %s\n Siguiente cancion: %s\n",current->title,current->artist, current->next->title);
@@ -38,6 +39,27 @@ void show_playlist(){
         i++;
         current = current->next;
     }
+}else{
+    printf("ERROR: La lista esta vacia");
+}
+}
+
+void delete_song(char* title, char* artist){
+    if(firstSong!=NULL){
+    current = firstSong->next;
+    while((current->artist!=artist && current->title != title) || current == firstSong){
+        current = current->next;
+    }
+    if(current->artist == artist && current->title == title){
+        current->previous->next = current->next;
+        current->next->previous = current->previous;
+        free(current);
+    }else{
+        printf("\nERROR: La cancion %s del artista %s no se encuentra en la playlist\n", title, artist);
+    }
+}else{
+    printf("ERROR: La playlist esta vacia");
+}
 }
 
 void free_playlist(){
